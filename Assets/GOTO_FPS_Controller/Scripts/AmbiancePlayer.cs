@@ -9,11 +9,12 @@ public class AmbiancePlayer : MonoBehaviour
 	[SerializeField] private AudioClip[] _audioClips;
 	[SerializeField] [Range(0f,10f)] private float _pitchVariance = 0;
 	[SerializeField] [Range(0f,10f)] private float _volumeVariance = 0;
+	[SerializeField] [Range(0f,1f)] private float _startingVolume = 1;
+	[SerializeField] [Range(0f,1f)] private float _startingPitch = 1;
 	
 	//bools
 	[SerializeField] private bool _canLoop = true;
 	[SerializeField] private bool _isWeighted = true;
-	
 	
 	
 	//variables
@@ -70,12 +71,12 @@ public class AmbiancePlayer : MonoBehaviour
 		}
 		
 		//get the next clip
-		_currentClip = _clipPool;
+		_currentClip = _clipPool[0];
 		_clipPool.RemoveAt(0);
 		
 		// Apply pitch and volume variance
-		_audioSource.pitch = 1f + Random.Range(-_pitchVariance, _pitchVariance);
-		_audioSource.volume = 1f + Random.Range(-_volumeVariance, _volumeVariance);
+		_audioSource.pitch = _startingPitch + Random.Range(-_pitchVariance, _pitchVariance);
+		_audioSource.volume = _startingVolume + Random.Range(-_volumeVariance, _volumeVariance);
 
 		// Play the clip
 		_audioSource.clip = _currentClip;
