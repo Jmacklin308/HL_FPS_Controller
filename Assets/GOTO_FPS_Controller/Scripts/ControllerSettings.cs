@@ -2,36 +2,27 @@
 
 public class ControllerSettings : MonoBehaviour
 {
-	
-	
-	[Header("Mouse Settings")]
-	[Range(0f,100f)] public float mouse_sensitivity = 50f;
-	[Range(0f,90f)] public float lowerViewLimit = 90f;
-	[Range(0f,-90f)] public float upperViewLimit = -90f;
-	[Range(5f,20f)] public float smoothRate = 10f;
-	public bool mouseSmoothEnable = true;
-	
-	[Header("Camera Settings")]
-	[Range(20f,160f)] public float fieldOfView = 75f;
-	[Range(20f,160f)] public float zoomFieldOfView = 55f;
-	[Range(0f,20f)] public float zoomSmoothRate = 20f;
-	
-	
-	
-	//singleton
-	public static ControllerSettings i;
-	
-	
-	// Awake is called when the script instance is being loaded.
-	protected void Awake()
+	// Serialized field for the ScriptableObject containing persistent settings
+	[SerializeField] private PlayerControllerSettings playerControllerSettings;
+    
+	// Public property to access the settings
+	public PlayerControllerSettings PlayerSettings => playerControllerSettings;
+
+	// Singleton instance
+	public static ControllerSettings Instance { get; private set; }
+    
+	// Awake is called when the script instance is being loaded
+	private void Awake()
 	{
-		if(i == null)
+		// Singleton pattern implementation
+		if (Instance == null)
 		{
-			i = this;
-		}else if (i != this)
+			Instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else
 		{
-			Destroy(this);	
+			Destroy(gameObject);
 		}
 	}
-	
 }

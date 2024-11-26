@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7f378a4aa58b28d4ea99b551ce4cab8c
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: ab79840212e84ded961df5ef93736275, type: 3}
+  processor:
+    mapClassName: TinyGoose.Tremble.Sample.SampleMapProcessor
+  splitMesh: 1
+  maxMeshSurfaceArea: 3000
+  smoothingAngle: 45
+  extraCommandLineArgs: 

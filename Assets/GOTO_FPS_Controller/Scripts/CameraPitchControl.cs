@@ -9,8 +9,11 @@ public class CameraPitchControl : MonoBehaviour
 	private Vector2 currentMouseDelta;
 	private Vector2 mouseDeltaVelocity;
 
+	private PlayerControllerSettings settings; 
+
 	void Start()
 	{
+		settings = ControllerSettings.Instance.PlayerSettings;
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 	}
@@ -18,12 +21,12 @@ public class CameraPitchControl : MonoBehaviour
 	void Update()
 	{
 		// Get raw mouse input
-		float mouseY = Input.GetAxisRaw("Mouse Y") * ControllerSettings.i.mouse_sensitivity;
+		float mouseY = Input.GetAxisRaw("Mouse Y") * settings.mouse_sensitivity;
 
 		// Smoothing logic
-		if (ControllerSettings.i.mouseSmoothEnable)
+		if (settings.mouseSmoothEnable)
 		{
-			float smoothingFactor = ControllerSettings.i.smoothRate;
+			float smoothingFactor = settings.smoothRate;
 			currentMouseDelta.y = Mathf.Lerp(currentMouseDelta.y, mouseY, 1f / smoothingFactor);
 
 			// Apply smoothing to pitch
@@ -36,12 +39,10 @@ public class CameraPitchControl : MonoBehaviour
 		}
 
 		// Clamp pitch to allowed range
-		pitch = Mathf.Clamp(pitch, ControllerSettings.i.upperViewLimit, ControllerSettings.i.lowerViewLimit);
+		pitch = Mathf.Clamp(pitch, settings.upperViewLimit, settings.lowerViewLimit);
 
 		// Apply pitch rotation to the transform
 		transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
 
-		// Debugging: Output current pitch
-		Debug.Log($"Pitch (X): {pitch}");
 	}
 }
