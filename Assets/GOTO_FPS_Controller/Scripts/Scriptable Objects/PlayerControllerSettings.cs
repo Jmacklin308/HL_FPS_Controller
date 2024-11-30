@@ -4,7 +4,7 @@
 public class PlayerControllerSettings : ScriptableObject
 {
 	[Header("Mouse Settings")]
-	[Range(0f,100f)] public float mouse_sensitivity = 50f;
+	[Range(0f,200f)] public float mouse_sensitivity = 100f;
 	[Range(0f,90f)] public float lowerViewLimit = 90f;
 	[Range(0f,-90f)] public float upperViewLimit = -90f;
 	[Range(5f,20f)] public float smoothRate = 10f;
@@ -23,8 +23,8 @@ public class PlayerControllerSettings : ScriptableObject
 	
 	
 	[Header("Jump Settings")]
-	[Range(10, 40f)] public float jumpForce = 15f; 
-	[Range(0f, 1f)] public float airControlFactor = 0.5f;
+	[Range(0f, 10f)] public float jumpForce = 15f; 
+	[Range(0f, 0.5f)] public float airControlFactor = 0.5f;
 	
 	
 	[Header("Crouch Settings")]
@@ -38,5 +38,9 @@ public class PlayerControllerSettings : ScriptableObject
 	
 	[Header("Traversal Settings")]
 	[Range(0f, 1f)] public float stepHeight = 0.3f; // Maximum height of obstacles the player can walk over.
+	
+	
+	[Header("Debug Settings")]
+	public bool showSpeed = true;
 
 }
